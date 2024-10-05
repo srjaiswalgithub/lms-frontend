@@ -5,6 +5,7 @@ import {Route,Routes} from 'react-router-dom'
 
 import AboutPage from './Pages/AboutPage';
 import Contact from './Pages/ContactPage';
+import CourseDescription from './Pages/Course/CourseDescription';
 import Courses from './Pages/Course/Courselist';
 import Denied from './Pages/Denied';
 import HomePage from './Pages/Homepage';
@@ -25,6 +26,7 @@ function App() {
         <Route path = "/courses" element = {<Courses/>}></Route>
         <Route path = "/contact" element = {<Contact/>}></Route>
         <Route path = "/denied" element = {<Denied/>}></Route>
+        <Route path = "/course/description" element = {<CourseDescription/>}></Route>
         <Route path = "*" element = {<PageNotFound/>}></Route>
         
       </Routes>
