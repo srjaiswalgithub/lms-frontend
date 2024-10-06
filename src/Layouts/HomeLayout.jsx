@@ -21,10 +21,12 @@ function Layout({children}){
     const isLoggedIn = useSelector((state)=>state?.auth?.isLoggedIn);
     // for dispaying the options, according to user role
     const role = useSelector((state)=>state?.auth?.role);
-
+    const st = useSelector((state)=>state?.auth);
     // function for changing the drawer width on menu button click
     function changewidth(){
         console.log('kkkk')
+        
+        console.log(st)
         const drawerSide = document.getElementsByClassName("drawer-side");
         drawerSide[0].style.width = "auto";
 
@@ -134,7 +136,7 @@ function Layout({children}){
                                     <li>
                                         <div className = "w-full flex items-center justify-center">
                                             <button className = "bg-pink-600 px-4 py-1 rounded-md w-full font-semibold ">
-                                                <Link to = {"/profile"}>Profile</Link>
+                                                <Link to = {"/user/profile"}>Profile</Link>
                                             </button>
                                             <button className = "bg-orange-600 px-4 py-1 rounded-md w-full font-semibold ">
                                                 <Link onClick={handleLogout}>Logout</Link>
