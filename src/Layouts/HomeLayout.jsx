@@ -85,9 +85,17 @@ function Layout({children}){
                                 <Link to = {"/"} className = "">Home</Link>
                             </li>
                             {/* displaying dashboard, if user is logged in */}
-                            {isLoggedIn && role ==="admin" && (
+                            {isLoggedIn && role ==="ADMIN" && (
                                 <li>
                                     <Link to = {"/admin/dashboard"}>Admin Dashboard</Link>
+                                </li>
+
+                            )}
+
+                            {/* displaying dashboard, if user is logged in */}
+                            {isLoggedIn && role ==="ADMIN" && (
+                                <li>
+                                    <Link to = {"/course/create"}>Create Course</Link>
                                 </li>
 
                             )}

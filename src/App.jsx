@@ -3,10 +3,12 @@ import './App.css'
 
 import {Route,Routes} from 'react-router-dom'
 
+import RequireAuth from './Components/Auth/RequireAuth';
 import AboutPage from './Pages/AboutPage';
 import Contact from './Pages/ContactPage';
 import CourseDescription from './Pages/Course/CourseDescription';
 import Courses from './Pages/Course/Courselist';
+import CreateCourse from './Pages/Course/CreateCourse';
 import Denied from './Pages/Denied';
 import HomePage from './Pages/Homepage';
 import Login from './Pages/loginPage';
@@ -27,6 +29,15 @@ function App() {
         <Route path = "/contact" element = {<Contact/>}></Route>
         <Route path = "/denied" element = {<Denied/>}></Route>
         <Route path = "/course/description" element = {<CourseDescription/>}></Route>
+
+
+        <Route element = {<RequireAuth allowedRoles={ ["ADMIN"]}/>}>
+          <Route path = "/course/create" element = {<CreateCourse/>}></Route>
+        </Route>
+
+
+
+
         <Route path = "*" element = {<PageNotFound/>}></Route>
         
       </Routes>
