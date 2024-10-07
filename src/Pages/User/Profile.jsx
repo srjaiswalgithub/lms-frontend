@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import {  useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 
 import Layout from "../../Layouts/HomeLayout";
 
 function Profile(){
     const userData = useSelector((state) => state?.auth?.data);
+    const navigate = useNavigate();
     return (
         <Layout>
             <div className="min-h-[90vh] flex items-center justify-center">
@@ -58,12 +59,21 @@ function Profile(){
                         </Link>
                     </div>
 
-                    {userData?.subscription?.status === "active" && (
+                    {(userData?.subscription?.status === "active") || (userData?.role === "ADMIN") ?(
                         <button
                         
                         className="w-full bg-red-600 hover:bg-red-500 transition-all ease-in-out duration-300 rounded-sm py-2 font-semibold cursor-pointer text-center"
+                        onClick={()=>navigate("/payment/cancel-subscription")}
                         >
                         Cancel Subscription
+                        </button>
+                    ):(
+                        <button
+                        
+                        className="w-full bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out duration-300 rounded-sm py-2 font-semibold cursor-pointer text-center"
+                        onClick={()=>navigate("/payment/subscribe")}
+                        >
+                        Buy Subscription
                         </button>
                     )}
                 </div>
