@@ -6,6 +6,8 @@ import Layout from "../../Layouts/HomeLayout";
 
 function Profile(){
     const userData = useSelector((state) => state?.auth?.data);
+    const usr = useSelector((state) => state?.auth);
+    console.log(usr)
     const navigate = useNavigate();
     return (
         <Layout>
@@ -28,7 +30,7 @@ function Profile(){
                         <p>{userData?.role}</p>
                         <p>Subscription :</p>
                         <p>
-                        {userData?.subscription?.status === "active"
+                        {userData?.subscription === "active"
                             ? "Active"
                             : "Inactive"}
                         </p>
@@ -59,7 +61,7 @@ function Profile(){
                         </Link>
                     </div>
 
-                    {(userData?.subscription?.status === "active") || (userData?.role === "ADMIN") ?(
+                    {(userData?.subscription === "active") || (userData?.role === "ADMIN") ?(
                         <button
                         
                         className="w-full bg-red-600 hover:bg-red-500 transition-all ease-in-out duration-300 rounded-sm py-2 font-semibold cursor-pointer text-center"

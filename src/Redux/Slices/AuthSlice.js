@@ -88,7 +88,7 @@ export const logout = createAsyncThunk("user/logout",async ()=>{
 // function to update user profile
 export const updateProfile = createAsyncThunk("/update/profile", async (newUserData)=>{
             try{
-                let res = axiosInstance.put(`/user/update/${newUserData[0]}`,newUserData[1]);
+                let res = axiosInstance.put(`user/update/${newUserData[0]}`,newUserData[1]);
                 toast.promise(res,{
                     loading:"Updating...",
                     success:"profile updated successfully",
