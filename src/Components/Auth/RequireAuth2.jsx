@@ -12,6 +12,6 @@ const RequireAuth2 = () => {
     else if(role === "ADMIN")return <AdminCannotAccess/>
     else if(subscription === "active")return <AlreadySubscribed/>
     else return <Outlet />
-};
+}; 
   
 export default RequireAuth2;

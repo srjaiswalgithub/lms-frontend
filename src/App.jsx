@@ -15,6 +15,7 @@ import HomePage from './Pages/Homepage';
 import Login from './Pages/loginPage';
 import PageNotFound from './Pages/PageNotFound';
 import Checkout from './Pages/Payment/Checkout';
+import CheckoutSuccess from './Pages/Payment/CheckoutSuccess';
 import SignUp from './Pages/SignUp';
 import EditProfile from './Pages/User/EditProfile';
 import Profile from './Pages/User/Profile';
@@ -46,8 +47,9 @@ function App() {
 
         <Route element = {<RequireAuth2 />}>
           <Route path = "/payment/subscribe" element = {<Checkout/>}></Route>
-          
+          <Route path = "/payment/success" element = {<CheckoutSuccess/>}></Route>
         </Route>
+        
 
 
 

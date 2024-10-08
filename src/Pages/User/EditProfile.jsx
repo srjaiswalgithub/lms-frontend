@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link ,useNavigate} from "react-router-dom";
 
 import Layout from "../../Layouts/HomeLayout";
-import { updateProfile } from "../../Redux/Slices/AuthSlice";
+import { getUserData,updateProfile } from "../../Redux/Slices/AuthSlice";
 
 function EditProfile(){
   const dispatch = useDispatch();
@@ -70,7 +70,8 @@ function EditProfile(){
     const newUserData = [data.userID, formData];
 
     // dispatching the api call using the thunk
-    const response = await dispatch(updateProfile(newUserData));
+    await dispatch(updateProfile(newUserData));
+    const response = await dispatch(getUserData());
     console.log("rrrr");
     console.log(response);
     //fetching the data to update

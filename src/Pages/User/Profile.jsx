@@ -1,14 +1,30 @@
 import React, { useEffect } from "react";
 import {  useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link , useNavigate} from "react-router-dom";
 
 import Layout from "../../Layouts/HomeLayout";
+import { getUserData } from "../../Redux/Slices/AuthSlice";
+import { CancelSubscription } from "../../Redux/Slices/PaymentSlice";
 
 function Profile(){
+    
     const userData = useSelector((state) => state?.auth?.data);
-    const usr = useSelector((state) => state?.auth);
-    console.log(usr)
+    let usr = useSelector((state) => state?.payment.subscription);
+    // console.log(usr)
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    async function cancelSubscription(){
+        await dispatch(CancelSubscription());
+        await dispatch(getUserData());
+        
+    }
+    useEffect(()=>{
+        dispatch(getUserData());
+    },[])
+
+    
     return (
         <Layout>
             <div className="min-h-[90vh] flex items-center justify-center">
@@ -65,7 +81,8 @@ function Profile(){
                         <button
                         
                         className="w-full bg-red-600 hover:bg-red-500 transition-all ease-in-out duration-300 rounded-sm py-2 font-semibold cursor-pointer text-center"
-                        onClick={()=>navigate("/payment/cancel-subscription")}
+                        // onClick={()=>navigate("/payment/cancel-subscription")}
+                        onClick = {cancelSubscription}
                         >
                         Cancel Subscription
                         </button>

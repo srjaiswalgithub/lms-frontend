@@ -107,16 +107,16 @@ export const updateProfile = createAsyncThunk("/update/profile", async (newUserD
 })
 
 
-// export const getUserData = createAsyncThunk("/user/details",async()=>{
-//     try{
-//         let res = axiosInstance.get("/user/me");
-//         return res?.data;
+export const getUserData = createAsyncThunk("/user/details",async()=>{
+    try{
+        let res = await axiosInstance.get("/user/me");
+        return res?.data;
 
-//     }
-//     catch(error){
-//         toast.error(error?.response?.data?.message);
-//     }
-// })
+    }
+    catch(error){
+        toast.error(error?.response?.data?.message);
+    }
+})
 const authSlice = createSlice({
     name:'auth',
     initialState,
@@ -140,15 +140,23 @@ const authSlice = createSlice({
             state.data = {};
             
         })
-        //for update user details
-        .addCase(updateProfile.fulfilled,(state,action)=>{
-            localStorage.setItem("data", JSON.stringify(action?.payload?.user));
+        // for update user details
+        .addCase(getUserData.fulfilled,(state,action)=>{
+            localStorage.setItem("data", JSON.stringify(action?.payload?.userData));
             localStorage.setItem("isLoggedIn", true);
             
             state.isLoggedIn = true;
-            state.data = action?.payload?.user;
-            state.role = action?.payload?.user?.role;
+            state.data = action?.payload?.userData;
+            state.role = action?.payload?.userData?.role;
         })
+        // .addCase(updateProfile.fulfilled,(state,action)=>{
+        //     localStorage.setItem("data", JSON.stringify(action?.payload?.user));
+        //     localStorage.setItem("isLoggedIn", true);
+            
+        //     state.isLoggedIn = true;
+        //     state.data = action?.payload?.user;
+        //     state.role = action?.payload?.user?.role;
+        // })
     }
 });
 

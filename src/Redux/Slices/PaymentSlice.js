@@ -27,6 +27,28 @@ export const subscribe = createAsyncThunk("/payment/subscribe",async()=>{
         toast.error(error?.response?.data?.message);
     }
 })
+//cancel subscription
+export const CancelSubscription = createAsyncThunk("/payment/cancelSubscription",async()=>{
+    try{
+        let res = axiosInstance.get("payments/unsubscribe");
+        toast.promise(res,{
+            loading:"loading...",
+            success:"subscription got cancellled!",
+            // success:(data)=>{
+            //     return data?.data?.message
+            // },
+            error:"Failed to cancel subscription!"
+        })
+
+        res = await res;
+        return res?.data;
+        
+
+    }
+    catch(error){
+        toast.error(error?.response?.data?.message);
+    }
+})
 
 const paymentSlice = createSlice({
     name:'payment',
@@ -36,6 +58,13 @@ const paymentSlice = createSlice({
         builder
         // // for user login
         .addCase(subscribe.fulfilled,(state,action)=>{
+            localStorage.setItem("data", JSON.stringify(action?.payload?.user));
+            
+            
+            
+            state.subscription = action?.payload?.user?.subscription;
+        })
+        .addCase(CancelSubscription.fulfilled,(state,action)=>{
             localStorage.setItem("data", JSON.stringify(action?.payload?.user));
             
             
